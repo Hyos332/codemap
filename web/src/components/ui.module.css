@@ -2,8 +2,8 @@
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  font: 500 21px/1 var(--serif);
-  letter-spacing: -0.01em;
+  font: 750 20px/1 var(--display);
+  letter-spacing: -0.04em;
   color: var(--ink);
 }
 

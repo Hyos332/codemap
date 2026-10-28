@@ -314,7 +314,7 @@ function paint(ctx: CanvasRenderingContext2D, scene: Scene, props: Props) {
   }
 
   if (heatMode) {
-    ctx.strokeStyle = tokens.accent;
+    ctx.strokeStyle = tokens.heat;
     ctx.lineWidth = 0.8 * px;
     for (const n of scene.nodes) {
       if (n.file.heat < 0.25 || !isLit(n)) continue;

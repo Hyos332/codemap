@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { Stage } from '../types';
+import { DecryptedText } from './motion';
 import styles from './Status.module.css';
 import { Button, Wordmark } from './ui';
 
@@ -20,7 +21,9 @@ export function Loading({ repo, stage, onCancel }: { repo: string; stage: Stage;
       <Wordmark onClick={onCancel} />
       <div className={styles.body}>
         <p className="eyebrow">{stage === 'queue' ? 'En cola' : 'Trazando'}</p>
-        <h1 className={styles.repo}>{repo}</h1>
+        <h1 className={styles.repo}>
+          <DecryptedText text={repo} duration={1100} />
+        </h1>
         <ol className={styles.steps}>
           {STEPS.map((step, i) => {
             const state = i < current ? 'done' : i === current ? 'active' : 'pending';

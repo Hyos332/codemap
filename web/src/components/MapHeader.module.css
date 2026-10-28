@@ -26,7 +26,8 @@
 }
 
 .repo a {
-  font: 400 19px/1 var(--serif);
+  font: 500 18px/1 var(--display);
+  letter-spacing: -0.02em;
   text-decoration: none;
   white-space: nowrap;
   overflow: hidden;
@@ -38,7 +39,7 @@
 }
 
 .repo a strong {
-  font-weight: 500;
+  font-weight: 750;
 }
 
 .repo a:hover strong {

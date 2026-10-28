@@ -8,6 +8,7 @@ export interface Tokens {
   ink2: string;
   cold: string;
   accent: string;
+  heat: string;
 }
 
 const STORAGE_KEY = 'codemap-theme';
@@ -32,5 +33,5 @@ export function useTheme(): [Theme, () => void] {
 export function readTokens(): Tokens {
   const style = getComputedStyle(document.documentElement);
   const read = (name: string) => style.getPropertyValue(name).trim();
-  return { paper: read('--paper'), ink: read('--ink'), ink2: read('--ink-2'), cold: read('--cold'), accent: read('--accent') };
+  return { paper: read('--paper'), ink: read('--ink'), ink2: read('--ink-2'), cold: read('--cold'), accent: read('--accent'), heat: read('--heat') };
 }

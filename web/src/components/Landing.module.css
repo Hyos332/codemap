@@ -26,13 +26,14 @@
 
 .title {
   margin: 22px 0 0;
-  font: 400 clamp(52px, 7.4vw, 96px) / 0.95 var(--serif);
-  letter-spacing: -0.035em;
+  font: 750 clamp(50px, 7vw, 92px) / 0.94 var(--display);
+  letter-spacing: -0.05em;
 }
 
 .title em {
-  font-style: italic;
+  font-style: normal;
   color: var(--accent);
+  background: linear-gradient(transparent 68%, var(--selection) 68%, var(--selection) 92%, transparent 92%);
 }
 
 .lede {
@@ -64,9 +65,20 @@
   border-color: var(--accent);
 }
 
-.prefix {
-  font-size: 14px;
-  color: var(--ink-3);
+.provider {
+  padding: 3px 7px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 2px;
+  font-size: 11px;
+  color: var(--accent);
+  animation: pop 0.3s var(--ease) both;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
 }
 
 .field input {
@@ -137,12 +149,12 @@
 }
 
 .figure path.hot {
-  stroke: var(--accent);
+  stroke: var(--heat);
   stroke-opacity: 0.75;
 }
 
 .peak {
-  fill: var(--accent);
+  fill: var(--heat);
 }
 
 .leader {
@@ -196,8 +208,8 @@
 
 .features h2 {
   margin: 14px 0 8px;
-  font: 400 26px/1.1 var(--serif);
-  letter-spacing: -0.015em;
+  font: 650 24px/1.1 var(--display);
+  letter-spacing: -0.03em;
 }
 
 .features p {

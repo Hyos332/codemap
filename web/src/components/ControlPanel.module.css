@@ -136,7 +136,7 @@
 .ramp {
   height: 8px;
   border-radius: 1px;
-  background: linear-gradient(90deg, var(--cold), var(--accent));
+  background: linear-gradient(90deg, var(--cold), var(--heat));
 }
 
 .rampLabels {

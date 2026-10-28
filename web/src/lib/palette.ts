@@ -1,8 +1,8 @@
 import type { Theme } from './theme';
 
 const FOLDER_HUES: Record<Theme, string[]> = {
-  light: ['#2f6690', '#b5652b', '#5b7f3a', '#8c4f7d', '#2e8077', '#a8842c', '#5d5ba0', '#9a4b3f'],
-  dark: ['#74a7d2', '#e0975c', '#97bb6d', '#cb8dba', '#66bbb0', '#dbb85c', '#9c9ad9', '#dc8977'],
+  light: ['#2b3dff', '#0f9488', '#d9406f', '#7a4fd6', '#c98a0a', '#1f86c4', '#4f8a2b', '#b0563b'],
+  dark: ['#7d8bff', '#3cc7b5', '#ff6f99', '#a98bff', '#f2b84b', '#5bb8f0', '#8cc95e', '#e48a6c'],
 };
 
 export const COLORED_GROUPS = FOLDER_HUES.light.length;

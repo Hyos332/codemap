@@ -44,7 +44,7 @@ export function MapView({ map, theme, onToggleTheme, onHome }: Props) {
   const counts = useMemo(() => ({ tests: map.nodes.filter((n) => n.test).length, isolated: map.nodes.filter(isIsolated).length }), [map]);
 
   const colorOf = useMemo(
-    () => (colorMode === 'heat' ? (n: FileNode) => mix(tokens.cold, tokens.accent, Math.sqrt(n.heat)) : (n: FileNode) => groupColors.get(n.group) ?? tokens.cold),
+    () => (colorMode === 'heat' ? (n: FileNode) => mix(tokens.cold, tokens.heat, Math.sqrt(n.heat)) : (n: FileNode) => groupColors.get(n.group) ?? tokens.cold),
     [colorMode, tokens, groupColors],
   );
 

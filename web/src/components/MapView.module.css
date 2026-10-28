@@ -15,7 +15,7 @@
   z-index: 2;
   top: calc(var(--header-h) + var(--gap));
   max-height: calc(100% - var(--header-h) - var(--gap) * 2);
-  overflow-y: auto;
+  overflow: hidden auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: var(--rule-strong) transparent;

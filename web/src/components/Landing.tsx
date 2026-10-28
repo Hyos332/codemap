@@ -1,9 +1,10 @@
 import { useMemo, useState, type FormEvent } from 'react';
-import { parseRepo } from '../types';
+import { parseRepo, PROVIDERS, repoSlug } from '../types';
 import styles from './Landing.module.css';
+import { BlurText, DecryptedText } from './motion';
 import { Button, ThemeToggle, Wordmark, type ThemeProps } from './ui';
 
-const EXAMPLES = ['pmndrs/zustand', 'vuejs/pinia', 'sindresorhus/ky'];
+const EXAMPLES = ['pmndrs/zustand', 'vuejs/pinia', 'gitlab.com/gitlab-org/gitlab-svgs'];
 
 const FEATURES = [
   { title: 'Dependencias', text: 'Quién importa a quién, resuelto con alias de tsconfig, workspaces, paquetes de Python y autoload de Composer.' },
@@ -18,7 +19,7 @@ export function Landing({ onSubmit, ...themeProps }: ThemeProps & { onSubmit: (r
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    if (parsed) onSubmit(`${parsed.owner}/${parsed.name}`);
+    if (parsed) onSubmit(repoSlug(parsed));
   };
 
   return (
@@ -30,36 +31,41 @@ export function Landing({ onSubmit, ...themeProps }: ThemeProps & { onSubmit: (r
 
       <main className={styles.hero}>
         <div className={styles.copy}>
-          <p className="eyebrow">Para leer código heredado</p>
+          <p className="eyebrow">
+            <DecryptedText text="Para leer código heredado" />
+          </p>
           <h1 className={styles.title}>
-            Antes de tocarlo, <em>entiéndelo.</em>
+            <BlurText text="Antes de tocarlo," />{' '}
+            <em>
+              <BlurText text="entiéndelo." delay={0.3} />
+            </em>
           </h1>
           <p className={styles.lede}>
-            Pega un repositorio público de GitHub y CodeMap traza el mapa de sus archivos: quién depende de quién, qué archivos sostienen al resto y
+            Pega un repositorio público de GitHub, GitLab o Bitbucket y CodeMap traza el mapa de sus archivos: quién depende de quién, qué archivos sostienen al resto y
             dónde se concentra el cambio.
           </p>
 
           <form className={styles.form} onSubmit={submit}>
             <label className={styles.field}>
-              <span className={`${styles.prefix} mono`}>github.com/</span>
               <input
                 className="mono"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-                placeholder="usuario/proyecto"
+                placeholder="usuario/proyecto o URL del repo"
                 spellCheck={false}
                 autoCapitalize="off"
                 autoComplete="off"
                 autoFocus
-                aria-label="Repositorio de GitHub"
+                aria-label="Repositorio de GitHub, GitLab o Bitbucket"
               />
+              {parsed && <span className={`${styles.provider} mono`}>{PROVIDERS[parsed.provider].label}</span>}
             </label>
             <Button type="submit" disabled={!parsed}>
               Trazar mapa <span aria-hidden="true">→</span>
             </Button>
           </form>
           <p className={`${styles.hint} mono`} aria-live="polite">
-            {showHint ? 'Formato: usuario/proyecto o la URL completa del repositorio.' : null}
+            {showHint ? 'Formato: usuario/proyecto, o la URL completa en GitHub, GitLab o Bitbucket.' : null}
           </p>
 
           <div className={styles.examples}>

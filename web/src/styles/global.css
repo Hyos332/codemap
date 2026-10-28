@@ -1,36 +1,38 @@
 :root,
 [data-theme='light'] {
-  --paper: #f2efe7;
-  --paper-raised: #f8f6f0;
-  --ink: #1b1b18;
-  --ink-2: #57554d;
-  --ink-3: #8d8a80;
-  --rule: #dcd7ca;
-  --rule-strong: #c4beaf;
-  --grid: rgb(27 27 24 / 0.045);
-  --accent: #c8471f;
-  --cold: #aaa69a;
-  --selection: rgb(200 71 31 / 0.18);
+  --paper: #eef1f4;
+  --paper-raised: #f8f9fb;
+  --ink: #0d1526;
+  --ink-2: #475266;
+  --ink-3: #8590a3;
+  --rule: #d6dce4;
+  --rule-strong: #bcc4d0;
+  --grid: rgb(13 21 38 / 0.05);
+  --accent: #2b3dff;
+  --heat: #e5306b;
+  --cold: #b6bdc9;
+  --selection: rgb(43 61 255 / 0.16);
   color-scheme: light;
 }
 
 [data-theme='dark'] {
-  --paper: #121311;
-  --paper-raised: #1a1b18;
-  --ink: #ece7da;
-  --ink-2: #b0ab9c;
-  --ink-3: #75726a;
-  --rule: #2b2c28;
-  --rule-strong: #3d3e39;
-  --grid: rgb(236 231 218 / 0.035);
-  --accent: #ee6a3a;
-  --cold: #55534b;
-  --selection: rgb(238 106 58 / 0.25);
+  --paper: #0a0e16;
+  --paper-raised: #111725;
+  --ink: #e6ebf3;
+  --ink-2: #a1abbe;
+  --ink-3: #657087;
+  --rule: #1c2433;
+  --rule-strong: #2c3649;
+  --grid: rgb(230 235 243 / 0.035);
+  --accent: #7d8bff;
+  --heat: #ff4d85;
+  --cold: #3b4457;
+  --selection: rgb(125 139 255 / 0.25);
   color-scheme: dark;
 }
 
 :root {
-  --serif: 'Newsreader Variable', 'Iowan Old Style', Georgia, serif;
+  --display: 'Bricolage Grotesque Variable', 'Helvetica Neue', sans-serif;
   --sans: 'IBM Plex Sans', system-ui, sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);

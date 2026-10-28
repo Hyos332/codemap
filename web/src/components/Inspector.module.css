@@ -18,8 +18,8 @@
 
 .title {
   margin: 10px 0 0;
-  font: 400 34px/1.02 var(--serif);
-  letter-spacing: -0.025em;
+  font: 700 32px/1.02 var(--display);
+  letter-spacing: -0.035em;
   overflow-wrap: anywhere;
 }
 
@@ -30,6 +30,7 @@
 
 .description {
   margin: 10px 0 0;
+  overflow-wrap: anywhere;
   font-size: 14px;
   color: var(--ink-2);
 }
@@ -127,7 +128,7 @@
 .meter span {
   display: block;
   height: 100%;
-  background: var(--accent);
+  background: var(--heat);
   transition: width 0.5s var(--ease);
 }
 
@@ -244,7 +245,7 @@
   margin: 26px 0 0;
   padding-top: 14px;
   border-top: 1px solid var(--rule);
-  font: italic 400 15px/1.45 var(--serif);
+  font: 400 13.5px/1.5 var(--sans);
   color: var(--ink-3);
 }
 
