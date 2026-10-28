@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: codemap
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: GITHUB_TOKEN
+        sync: false

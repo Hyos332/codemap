@@ -71,6 +71,12 @@ docker build -t codemap .
 docker run --rm -p 8787:8787 codemap
 ```
 
+### En Render (gratis)
+
+El repo incluye `render.yaml`. En [render.com](https://render.com): **New → Blueprint**, elige este repositorio y confirma. Render construye el `Dockerfile` y publica la app con HTTPS.
+
+El plan gratuito se duerme tras 15 minutos sin visitas; la primera petición después tarda en torno a un minuto en despertar.
+
 Opcionalmente, `GITHUB_TOKEN` sube el límite de la API de GitHub usada para los metadatos del repo.
 
 ## Límites
