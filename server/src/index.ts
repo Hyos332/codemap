@@ -23,7 +23,7 @@ app.get<{ Querystring: { repo?: string } }>('/api/analyze', async (req, reply) =
 
   const ref = parseRepo(req.query.repo ?? '');
   if (!ref) {
-    send('failure', { status: 400, message: 'Escribe un repositorio de GitHub como «usuario/proyecto».' });
+    send('failure', { status: 400, message: 'Escribe un repositorio como «usuario/proyecto» o pega su URL de GitHub, GitLab o Bitbucket.' });
     res.end();
     return;
   }

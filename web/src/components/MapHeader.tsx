@@ -1,6 +1,7 @@
 import { formatCompact, formatNumber } from '../lib/format';
-import type { RepoMap } from '../types';
+import { PROVIDERS, type RepoMap } from '../types';
 import styles from './MapHeader.module.css';
+import { CountUp } from './motion';
 import { Button, Kbd, ThemeToggle, Wordmark, type ThemeProps } from './ui';
 
 const MOD_KEY = /Mac|iPhone|iPad/.test(navigator.userAgent) ? '⌘' : 'Ctrl';
@@ -14,10 +15,10 @@ interface Props extends ThemeProps {
 
 export function MapHeader({ map, onHome, onSearch, onTogglePanel, ...themeProps }: Props) {
   const { repo, stats } = map;
-  const facts = [
-    [formatNumber(stats.files), 'archivos'],
-    [formatNumber(stats.edges), 'dependencias'],
-    [formatNumber(stats.commits), 'commits'],
+  const facts: [number, string][] = [
+    [stats.files, 'archivos'],
+    [stats.edges, 'dependencias'],
+    [stats.commits, 'commits'],
   ];
 
   return (
@@ -32,7 +33,7 @@ export function MapHeader({ map, onHome, onSearch, onTogglePanel, ...themeProps 
           <strong>{repo.name}</strong>
         </a>
         <span className={`${styles.ref} mono`}>
-          {repo.branch} · {repo.sha.slice(0, 7)}
+          {PROVIDERS[repo.provider].label} · {repo.branch} · {repo.sha.slice(0, 7)}
           {repo.stars !== null && <> · ★ {formatCompact(repo.stars)}</>}
         </span>
       </div>
@@ -41,7 +42,9 @@ export function MapHeader({ map, onHome, onSearch, onTogglePanel, ...themeProps 
         {facts.map(([value, label]) => (
           <div key={label}>
             <dt>{label}</dt>
-            <dd>{value}</dd>
+            <dd>
+              <CountUp value={value} format={formatNumber} />
+            </dd>
           </div>
         ))}
       </dl>

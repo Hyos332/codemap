@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { formatNumber, formatRelative, plural, splitPath } from '../lib/format';
 import { topBy, type GraphIndex } from '../lib/graph';
-import type { FileNode, Lang, RepoMap } from '../types';
+import { PROVIDERS, type FileNode, type Lang, type RepoMap } from '../types';
 import styles from './Inspector.module.css';
 
 const LANG_NAMES: Record<Lang, string> = { ts: 'TypeScript', js: 'JavaScript', vue: 'Vue', svelte: 'Svelte', py: 'Python', php: 'PHP' };
@@ -111,8 +111,8 @@ function FileDetail({ map, index, node, colorOf, onInspect, onClose }: Props & {
       <FileList title="Importado por" files={filesFor(index.importedBy.get(node.id))} colorOf={colorOf} onInspect={onInspect} accent />
       <FileList title="Importa" files={filesFor(index.imports.get(node.id))} colorOf={colorOf} onInspect={onInspect} />
 
-      <a className={styles.external} href={`${map.repo.url}/blob/${map.repo.sha}/${node.id}`} target="_blank" rel="noreferrer">
-        Abrir en GitHub <span aria-hidden="true">↗</span>
+      <a className={styles.external} href={PROVIDERS[map.repo.provider].fileUrl(map.repo.url, map.repo.sha, node.id)} target="_blank" rel="noreferrer">
+        Abrir en {PROVIDERS[map.repo.provider].label} <span aria-hidden="true">↗</span>
       </a>
     </div>
   );

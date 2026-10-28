@@ -1,4 +1,5 @@
 import { analyzeRepo } from './analyze.js';
+import { repoSlug } from './repoRef.js';
 import type { RepoMap, RepoRef, Stage } from './types.js';
 
 const CACHE_TTL_MS = 30 * 60 * 1000;
@@ -17,7 +18,7 @@ const waiting: (() => void)[] = [];
 let active = 0;
 
 export function requestMap(ref: RepoRef, onStage: (stage: Stage) => void): { result: Promise<RepoMap>; detach: () => void } {
-  const key = `${ref.owner}/${ref.name}`.toLowerCase();
+  const key = repoSlug(ref).toLowerCase();
 
   const cached = cache.get(key);
   if (cached && Date.now() - cached.at < CACHE_TTL_MS) {

@@ -3,9 +3,9 @@ import { describe, it } from 'node:test';
 import { buildGraph } from './analyze.js';
 import { parseLog } from './history.js';
 import { extractImports } from './imports.js';
-import { parseRepo } from './repoRef.js';
+import { parseRepo, repoSlug, repoUrl } from './repoRef.js';
 import { groupOf, isTestFile } from './scan.js';
-import type { Lang } from './types.js';
+import type { Lang, RepoRef } from './types.js';
 
 function graphOf(files: Record<string, string>, configs: Record<string, string> = {}) {
   const list = Object.entries(files).map(([path, content]) => ({
@@ -18,14 +18,32 @@ function graphOf(files: Record<string, string>, configs: Record<string, string> 
 }
 
 describe('parseRepo', () => {
-  it('accepts the usual ways people paste a repo', () => {
+  it('accepts the usual ways people paste a GitHub repo', () => {
     for (const input of ['vuejs/pinia', 'https://github.com/vuejs/pinia', 'github.com/vuejs/pinia.git', 'git@github.com:vuejs/pinia.git', 'https://github.com/vuejs/pinia/tree/v2/packages']) {
-      assert.deepEqual(parseRepo(input), { owner: 'vuejs', name: 'pinia' }, input);
+      assert.deepEqual(parseRepo(input), { provider: 'github', owner: 'vuejs', name: 'pinia' }, input);
     }
   });
 
-  it('rejects anything that is not a plain owner/name', () => {
-    for (const input of ['', 'pinia', '../etc/passwd', 'a/..', 'owner/na me', 'https://gitlab.com/a/b']) {
+  it('understands GitLab nested groups and Bitbucket workspaces', () => {
+    const cases: [string, RepoRef][] = [
+      ['https://gitlab.com/gitlab-org/frontend/playground/-/tree/main/src', { provider: 'gitlab', owner: 'gitlab-org/frontend', name: 'playground' }],
+      ['git@gitlab.com:group/project.git', { provider: 'gitlab', owner: 'group', name: 'project' }],
+      ['https://user@bitbucket.org/team/app.git', { provider: 'bitbucket', owner: 'team', name: 'app' }],
+      ['bitbucket.org/team/app/src/main/README.md', { provider: 'bitbucket', owner: 'team', name: 'app' }],
+    ];
+    for (const [input, expected] of cases) assert.deepEqual(parseRepo(input), expected, input);
+  });
+
+  it('builds slugs and URLs that round-trip', () => {
+    const ref = parseRepo('gitlab.com/a/b/c')!;
+    assert.equal(repoSlug(ref), 'gitlab.com/a/b/c');
+    assert.equal(repoUrl(ref), 'https://gitlab.com/a/b/c');
+    assert.deepEqual(parseRepo(repoSlug(ref)), ref);
+    assert.equal(repoSlug(parseRepo('https://github.com/a/b')!), 'a/b');
+  });
+
+  it('rejects anything that is not a plain repo path', () => {
+    for (const input of ['', 'pinia', '../etc/passwd', 'a/..', 'owner/na me', 'https://example.com/a/b', 'gitlab.example.com/a/b']) {
       assert.equal(parseRepo(input), null, input);
     }
   });

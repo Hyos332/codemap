@@ -1,4 +1,7 @@
+export type Provider = 'github' | 'gitlab' | 'bitbucket';
+
 export interface RepoRef {
+  provider: Provider;
   owner: string;
   name: string;
 }
@@ -26,6 +29,7 @@ export interface Edge {
 
 export interface RepoMap {
   repo: {
+    provider: Provider;
     owner: string;
     name: string;
     url: string;

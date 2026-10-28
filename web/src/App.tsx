@@ -23,7 +23,7 @@ function titleOf(view: View): string {
     case 'loading':
       return `Trazando ${view.repo} · CodeMap`;
     case 'map':
-      return `${view.map.repo.owner}/${view.map.repo.name} · CodeMap`;
+      return `${view.map.repo.name} · CodeMap`;
     case 'error':
       return 'No se pudo trazar · CodeMap';
     case 'home':

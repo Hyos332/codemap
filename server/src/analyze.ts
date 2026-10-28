@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { readHistory, type History } from './history.js';
 import { extractImports } from './imports.js';
 import { cloneRepo, fetchMeta } from './repo.js';
+import { repoUrl } from './repoRef.js';
 import { Resolver } from './resolve.js';
 import { countLines, groupOf, isTestFile, scanRepo, type SourceFile } from './scan.js';
 import type { Edge, FileNode, RepoMap, RepoRef, Stage } from './types.js';
@@ -32,7 +33,7 @@ export async function analyzeRepo(ref: RepoRef, onStage: (stage: Stage) => void)
     const languages = Object.fromEntries(countBy(scan.files.map((f) => f.lang)));
 
     return {
-      repo: { ...ref, url: `https://github.com/${ref.owner}/${ref.name}`, branch, sha, ...meta },
+      repo: { ...ref, url: repoUrl(ref), branch, sha, ...meta },
       stats: {
         files: nodes.length,
         edges: graph.edges.length,
