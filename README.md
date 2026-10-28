@@ -1,90 +1,67 @@
+<div align="center">
+
 # CodeMap
 
 **Antes de tocarlo, entiéndelo.**
 
-CodeMap convierte un repositorio público de **GitHub, GitLab o Bitbucket** en un mapa interactivo de sus archivos: quién importa a quién, qué archivos sostienen al resto y dónde se concentra el cambio.
+Pega un repositorio de GitHub, GitLab o Bitbucket y mira su código como un mapa:<br>
+quién depende de quién, qué archivos sostienen al resto y dónde se concentra el cambio.
 
-La mayor parte del trabajo real no es empezar proyectos, es heredarlos. Esta herramienta nace de eso: tener una primera vista del sistema antes de abrir el primer archivo.
+<br>
 
-## Qué muestra
+<img src="docs/map-dark.jpg" alt="Mapa de dependencias de vuejs/pinia en modo oscuro" width="100%">
 
-- **Dependencias.** Un grafo de fuerzas con cada archivo como nodo y cada import como arista, agrupado por carpeta.
-- **Archivos clave.** Los más importados. Si los rompes, se rompe todo lo demás.
-- **Zonas calientes.** Commits × tamaño sobre los últimos 1.000 commits. Los archivos grandes que cambian mucho suelen concentrar bugs y revisiones lentas; en el mapa aparecen rodeados de anillos, como curvas de nivel.
-- **Inspector.** Al seleccionar un archivo: líneas, autores, último cambio, quién lo usa y qué usa.
+</div>
 
-## Dónde funciona
+<br>
 
-Pega `usuario/proyecto` (se asume GitHub) o la URL del repositorio, en HTTPS o SSH:
+<table>
+  <tr>
+    <td width="50%"><img src="docs/heat-light.jpg" alt="Modo calor con store.ts seleccionado"></td>
+    <td width="50%"><img src="docs/landing.jpg" alt="Portada de CodeMap"></td>
+  </tr>
+  <tr>
+    <td><b>Zonas calientes.</b> Commits × tamaño. Los anillos marcan los archivos más inestables.</td>
+    <td><b>Cualquier repo público.</b> <code>usuario/proyecto</code> o la URL de GitHub, GitLab o Bitbucket.</td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/search.jpg" alt="Búsqueda de archivos"></td>
+    <td width="50%" valign="top">
+      <br>
+      <b>Lo que entiende</b>
+      <br><br>
+      TypeScript · JavaScript · Vue · Svelte · Python · PHP
+      <br><br>
+      Alias de <code>tsconfig</code>, workspaces, paquetes de Python y autoload PSR-4 de Composer.
+    </td>
+  </tr>
+  <tr>
+    <td><b>Búsqueda instantánea.</b> <kbd>Ctrl</kbd> <kbd>K</kbd> para saltar a cualquier archivo.</td>
+    <td></td>
+  </tr>
+</table>
 
-- `github.com/vuejs/pinia`
-- `gitlab.com/grupo/subgrupo/proyecto` — incluidos subgrupos y enlaces `/-/tree/...`
-- `bitbucket.org/workspace/repo`
+<br>
 
-## Qué entiende
-
-| Ecosistema | Resolución |
-| --- | --- |
-| TypeScript / JavaScript | rutas relativas, `index`, imports ESM `.js` → `.ts`, `paths` y `baseUrl` de `tsconfig`/`jsconfig`, alias `@/` y `~/`, workspaces de npm |
-| Vue / Svelte | bloques `<script>` de los componentes |
-| Python | imports absolutos y relativos, paquetes con `__init__.py`, layout `src/` |
-| PHP | `use` con autoload PSR-4 de Composer, `require`/`include` |
-
-## Cómo funciona
-
-```
-navegador ──SSE──▶ servidor Fastify
-                     ├─ git clone --depth 1000 --filter=blob:none
-                     ├─ escaneo de archivos fuente y configs
-                     ├─ extracción y resolución de imports
-                     └─ git log --name-only → churn por archivo
-```
-
-El análisis se transmite por *server-sent events*, así la interfaz enseña cada fase en vivo. Los resultados se guardan en caché 30 minutos y las peticiones simultáneas al mismo repo comparten un único clon.
-
-El mapa se pinta en `<canvas>` con `d3-force`, con zoom, búsqueda (`Ctrl/⌘ + K`), modo claro y oscuro, y foco animado sobre cada archivo. Las transiciones de texto y contadores usan `motion`.
-
-## Stack
-
-React 19 · TypeScript · Vite · d3-force · motion · Fastify · Node 24 · Docker
-
-## Ejecutar en local
-
-Necesitas Node 20.11+ y `git`.
+## Ejecutar
 
 ```bash
 npm install
 npm run dev
 ```
 
-La web queda en `http://localhost:5173` y la API en `http://localhost:8787`.
+o con Docker:
 
 ```bash
-npm test
-npm run typecheck
+docker build -t codemap . && docker run --rm -p 8787:8787 codemap
 ```
 
-### Con Docker
+<br>
 
-```bash
-docker build -t codemap .
-docker run --rm -p 8787:8787 codemap
-```
+<div align="center">
 
-### En Render (gratis)
+React · TypeScript · d3-force · motion · Fastify · Docker
 
-El repo incluye `render.yaml`. En [render.com](https://render.com): **New → Blueprint**, elige este repositorio y confirma. Render construye el `Dockerfile` y publica la app con HTTPS.
+<sub>Hecho por <b>Luis Felipe Hoyos Vega</b> · MIT</sub>
 
-El plan gratuito se duerme tras 15 minutos sin visitas; la primera petición después tarda en torno a un minuto en despertar.
-
-Opcionalmente, `GITHUB_TOKEN` sube el límite de la API de GitHub usada para los metadatos del repo.
-
-## Límites
-
-- Solo repositorios públicos de GitHub, GitLab.com y Bitbucket Cloud.
-- Hasta 5.000 archivos fuente y archivos de hasta 512 KB.
-- La resolución de imports es estática: imports generados en tiempo de ejecución no aparecen.
-
-## Licencia
-
-MIT © Luis Felipe Hoyos Vega
+</div>
