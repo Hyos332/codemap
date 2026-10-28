@@ -1,0 +1,101 @@
+.screen {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 40px;
+}
+
+.body {
+  width: min(100%, 560px);
+  margin: auto;
+  padding: 48px 0 12vh;
+}
+
+.repo,
+.message {
+  margin: 14px 0 36px;
+  font: 400 clamp(36px, 5vw, 56px) / 1.02 var(--serif);
+  letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
+}
+
+.message {
+  font-size: clamp(30px, 4vw, 44px);
+}
+
+.steps {
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+
+.steps li {
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  align-items: center;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-3);
+  transition: color 0.3s var(--ease);
+}
+
+.marker {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+}
+
+.status {
+  font-size: 12px;
+}
+
+.done {
+  color: var(--ink-2);
+}
+
+.done .marker {
+  background: currentColor;
+}
+
+.active {
+  color: var(--ink);
+}
+
+.active .marker {
+  border-color: var(--accent);
+  background: var(--accent);
+  animation: pulse 1.4s var(--ease) infinite;
+}
+
+.active .status {
+  color: var(--accent);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--selection);
+  }
+  100% {
+    box-shadow: 0 0 0 9px transparent;
+  }
+}
+
+.note {
+  margin: 0 0 28px;
+  font-size: 13.5px;
+  color: var(--ink-3);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 600px) {
+  .screen {
+    padding: 20px;
+  }
+}

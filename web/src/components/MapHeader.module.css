@@ -1,0 +1,147 @@
+.header {
+  position: absolute;
+  z-index: 3;
+  inset: 0 0 auto;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 var(--gap) 0 22px;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+
+.rule {
+  width: 1px;
+  height: 22px;
+  background: var(--rule-strong);
+}
+
+.repo {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  min-width: 0;
+}
+
+.repo a {
+  font: 400 19px/1 var(--serif);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.repo a span {
+  color: var(--ink-2);
+}
+
+.repo a strong {
+  font-weight: 500;
+}
+
+.repo a:hover strong {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 4px;
+}
+
+.slash {
+  margin: 0 3px;
+  color: var(--ink-3) !important;
+}
+
+.ref {
+  font-size: 11.5px;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.facts {
+  display: flex;
+  gap: 22px;
+  margin: 0 0 0 auto;
+}
+
+.facts div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 3px;
+}
+
+.facts dt {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.facts dd {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 18px;
+  border-left: 1px solid var(--rule);
+}
+
+.search {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 34px;
+  padding: 0 8px 0 14px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--ink-2);
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.search span {
+  margin-right: 8px;
+}
+
+.search:hover {
+  border-color: var(--rule-strong);
+  color: var(--ink);
+}
+
+@media (max-width: 1180px) {
+  .facts {
+    display: none;
+  }
+
+  .actions {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .header {
+    gap: 12px;
+    padding: 0 10px 0 14px;
+  }
+
+  .rule,
+  .ref,
+  .search span {
+    display: none;
+  }
+
+  .actions {
+    padding-left: 0;
+    border-left: 0;
+    gap: 6px;
+  }
+
+  .search {
+    padding: 0 8px;
+  }
+}

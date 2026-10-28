@@ -1,0 +1,114 @@
+.backdrop {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 14vh 16px 16px;
+  background: color-mix(in srgb, var(--paper) 55%, transparent);
+  backdrop-filter: blur(3px);
+  animation: appear 0.2s var(--ease) both;
+}
+
+.dialog {
+  width: min(100%, 580px);
+  background: var(--paper-raised);
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  box-shadow: 0 30px 70px -30px rgb(0 0 0 / 0.45);
+  overflow: hidden;
+  animation: drop 0.3s var(--ease) both;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes drop {
+  from {
+    transform: translateY(-8px) scale(0.99);
+  }
+}
+
+.input {
+  width: 100%;
+  height: 54px;
+  padding: 0 20px;
+  font-size: 15px;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--ink-3);
+}
+
+.results {
+  max-height: min(420px, 52vh);
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.results button {
+  display: grid;
+  grid-template-columns: 8px auto 1fr;
+  align-items: baseline;
+  gap: 12px;
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 2px;
+  text-align: left;
+}
+
+.results li[aria-selected='true'] button {
+  background: var(--paper);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.dot {
+  align-self: center;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.name {
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.dir {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+
+.empty {
+  padding: 18px 12px;
+  font-size: 13.5px;
+  color: var(--ink-3);
+}
+
+.footer {
+  display: flex;
+  gap: 18px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--rule);
+  font-size: 11px;
+  color: var(--ink-3);
+}
+
+.footer span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}

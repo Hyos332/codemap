@@ -1,0 +1,52 @@
+.wrap {
+  position: absolute;
+  inset: 0;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+
+.canvas:active {
+  cursor: grabbing;
+}
+
+.canvas[data-hovering] {
+  cursor: pointer;
+}
+
+.scale {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 18px 20px;
+  font-size: 11px;
+  color: var(--ink-3);
+  pointer-events: none;
+}
+
+.bar {
+  width: 48px;
+  height: 5px;
+  border: 1px solid var(--ink-3);
+  border-top: 0;
+}
+
+.scale button {
+  pointer-events: auto;
+  padding: 3px 8px;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  background: var(--paper);
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+
+.scale button:hover {
+  color: var(--ink);
+  border-color: var(--rule-strong);
+}

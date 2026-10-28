@@ -1,0 +1,257 @@
+.page {
+  min-height: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.hero {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 48px;
+  padding: 72px 0 64px;
+}
+
+.title {
+  margin: 22px 0 0;
+  font: 400 clamp(52px, 7.4vw, 96px) / 0.95 var(--serif);
+  letter-spacing: -0.035em;
+}
+
+.title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.lede {
+  max-width: 34em;
+  margin: 28px 0 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.form {
+  display: flex;
+  gap: 12px;
+  margin-top: 40px;
+  max-width: 560px;
+}
+
+.field {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  height: 40px;
+  border-bottom: 1.5px solid var(--ink);
+  transition: border-color 0.2s var(--ease);
+}
+
+.field:focus-within {
+  border-color: var(--accent);
+}
+
+.prefix {
+  font-size: 14px;
+  color: var(--ink-3);
+}
+
+.field input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0 0 0 2px;
+  font-size: 15px;
+  background: none;
+  border: 0;
+  outline: none;
+}
+
+.field input::placeholder {
+  color: var(--ink-3);
+  opacity: 0.7;
+}
+
+.hint {
+  min-height: 18px;
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.examples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 18px;
+  margin-top: 18px;
+}
+
+.examples button {
+  font-size: 13px;
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 4px;
+  transition: color 0.2s var(--ease), text-decoration-color 0.2s var(--ease);
+}
+
+.examples button:hover {
+  color: var(--ink);
+  text-decoration-color: var(--accent);
+}
+
+.figure {
+  position: relative;
+  margin: 0;
+  justify-self: end;
+  width: min(100%, 460px);
+}
+
+.figure svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+.figure path {
+  fill: none;
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: draw 1.6s var(--ease) forwards;
+}
+
+.figure path.hot {
+  stroke: var(--accent);
+  stroke-opacity: 0.75;
+}
+
+.peak {
+  fill: var(--accent);
+}
+
+.leader {
+  stroke: var(--ink-3);
+  stroke-width: 0.75;
+}
+
+.figure figcaption {
+  position: absolute;
+  top: 24%;
+  right: 0;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 10px;
+  border-left: 1px solid var(--ink-3);
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+
+.figure figcaption span:first-child {
+  color: var(--ink);
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--rule);
+}
+
+.features article {
+  padding: 28px 32px 36px 0;
+}
+
+.features article + article {
+  padding-left: 32px;
+  border-left: 1px solid var(--rule);
+}
+
+.index {
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.features h2 {
+  margin: 14px 0 8px;
+  font: 400 26px/1.1 var(--serif);
+  letter-spacing: -0.015em;
+}
+
+.features p {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 14.5px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 22px 0 28px;
+  border-top: 1px solid var(--rule);
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+@media (max-width: 900px) {
+  .page {
+    padding: 0 20px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 48px 0;
+  }
+
+  .figure {
+    justify-self: center;
+    max-width: 340px;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+  }
+
+  .features article,
+  .features article + article {
+    padding: 24px 0;
+    border-left: 0;
+  }
+
+  .features article + article {
+    border-top: 1px solid var(--rule);
+  }
+}
+
+@media (max-width: 520px) {
+  .form {
+    flex-direction: column;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
