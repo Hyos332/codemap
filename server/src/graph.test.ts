@@ -3,7 +3,7 @@ import { describe, it } from 'node:test';
 import { buildGraph } from './analyze.js';
 import { parseLog } from './history.js';
 import { extractImports } from './imports.js';
-import { parseRepo } from './repo.js';
+import { parseRepo } from './repoRef.js';
 import { groupOf, isTestFile } from './scan.js';
 import type { Lang } from './types.js';
 

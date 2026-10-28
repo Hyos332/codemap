@@ -19,7 +19,7 @@ const FIELD = '\u001f';
 export async function readHistory(dir: string): Promise<History> {
   const [log, boundary] = await Promise.all([
     git(
-      ['-c', 'core.quotepath=off', 'log', '--no-merges', '--name-only', `-n${HISTORY_DEPTH}`, `--format=${RECORD}%H${FIELD}%an${FIELD}%aI`],
+      ['-c', 'core.quotepath=off', 'log', '--no-merges', '--no-renames', '--name-only', `-n${HISTORY_DEPTH}`, `--format=${RECORD}%H${FIELD}%an${FIELD}%aI`],
       { cwd: dir, timeout: 60_000 },
     ),
     shallowBoundary(dir),

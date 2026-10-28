@@ -5,22 +5,6 @@ import { AppError, type RepoRef } from './types.js';
 
 export const HISTORY_DEPTH = 1000;
 const MAX_REPO_KB = 1_500_000;
-const SEGMENT = /^[A-Za-z0-9_.-]{1,100}$/;
-
-export function parseRepo(input: string): RepoRef | null {
-  const cleaned = input
-    .trim()
-    .replace(/^git@github\.com:/i, '')
-    .replace(/^(?:https?:\/\/)?(?:www\.)?github\.com\//i, '')
-    .replace(/[?#].*$/, '');
-  const [owner, rawName] = cleaned.split('/');
-  const name = rawName?.replace(/\.git$/i, '');
-  if (!owner || !name) return null;
-  for (const part of [owner, name]) {
-    if (!SEGMENT.test(part) || /^\.+$/.test(part)) return null;
-  }
-  return { owner, name };
-}
 
 export interface RepoMeta {
   description: string | null;
